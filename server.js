@@ -55,6 +55,21 @@ app.get("/files", (req, res) => {
     });
 });
 
+// ✅ Delete a file by name
+app.delete("/files/:filename", (req, res) => {
+    const { filename } = req.params;
+    const filePath = path.join(__dirname, "uploads", filename);
+
+    fs.unlink(filePath, (err) => {
+        if (err) {
+            console.error("Error deleting file:", err);
+            return res.status(404).json({ error: "File not found" });
+        }
+        res.json({ status: "ok", message: "File deleted" });
+    });
+});
+
+
 app.listen(PORT, () => {
     console.log(`Server running on http://localhost:${PORT}`);
 });
