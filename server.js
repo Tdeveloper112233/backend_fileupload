@@ -49,7 +49,7 @@ app.get("/files", (req, res) => {
 
         const fileList = files.map((filename) => ({
             name: filename,
-            url: `${BACKEND_URL}/uploads/${filename}`,
+            url: `http://localhost:${PORT}/uploads/${filename}`,
         }));
         res.json(fileList);
     });
